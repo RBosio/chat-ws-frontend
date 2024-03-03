@@ -3,5 +3,8 @@
 @tailwind utilities;
 
 body {
-  background-color: #041014
+  background-color: #041014;
+  font-family: "Indie Flower", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
