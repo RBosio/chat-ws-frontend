@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core"
-import { FriendService } from "../friend/friend.service"
 import { NgFor } from "@angular/common"
 import { RouterLink } from "@angular/router"
+import { FriendService } from "../../services/friend.service"
 
 @Component({
   selector: "app-sidebar",
