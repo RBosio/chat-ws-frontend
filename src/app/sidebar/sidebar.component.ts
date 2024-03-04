@@ -22,11 +22,13 @@ export class SidebarComponent implements OnInit {
 
       this.user.groups.map((fr: any) => {
         if (fr.users.length === 2) {
-          this.friends = fr.users
-            .filter((u: any) => u.id !== this.id)
-            .map((r: any) => {
-              return { user: r, group: fr.name }
-            })
+          this.friends = this.friends.concat(
+            fr.users
+              .filter((u: any) => u.id !== this.id)
+              .map((r: any) => {
+                return { user: r, group: fr.name }
+              })
+          )
         } else {
         }
       })

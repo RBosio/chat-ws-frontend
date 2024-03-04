@@ -30,8 +30,9 @@
         type="text"
         class="absolute -bottom-12 border border-primary p-1 w-3/4 focus:outline-none"
         [(ngModel)]="message"
+        (keypress)="sendMessage($event.key)"
       />
-      <div class="absolute -bottom-12 right-12" (click)="sendMessage()">
+      <div class="absolute -bottom-12 right-12" (click)="sendMessage('')">
         <app-button text="Enviar"></app-button>
       </div>
     </div>

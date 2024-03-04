@@ -29,12 +29,14 @@ export class ChatComponent implements OnInit {
     })
   }
 
-  sendMessage() {
-    this.groupService
-      .sendMessage(this.message, this.groupId, this.id)
-      .subscribe((res) => {
-        this.message = ""
-      })
+  sendMessage(key: string) {
+    if (key === "Enter" || key === "") {
+      this.groupService
+        .sendMessage(this.message, this.groupId, this.id)
+        .subscribe((res) => {
+          this.message = ""
+        })
+    }
   }
 
   constructor(
