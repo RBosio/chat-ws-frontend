@@ -3,12 +3,24 @@
   <h3 class="text-3xl text-center text-slate-400">
     La aplicación que te permitirá conocer gente de todo el mundo
   </h3>
-  <h4 class="text-center mt-12 text-2xl">
-    Inicia sesión para comenzar a chatear
-  </h4>
-  <div class="flex items-center justify-between">
-    <a [routerLink]="['/login']" class="bg-primary p-2 rounded-md m-auto"
-      >Empezar</a
-    >
+  <div *ngIf="!id">
+    <h4 class="text-center mt-12 text-2xl">
+      Inicia sesión para comenzar a chatear
+    </h4>
+    <div class="flex items-center justify-between">
+      <a [routerLink]="['/login']" class="bg-primary p-2 rounded-md m-auto"
+        >Empezar</a
+      >
+    </div>
+  </div>
+  <div *ngIf="id">
+    <h4 class="text-center mt-12 text-2xl">
+      Accede a tus chats ahora para comenzar a hablar
+    </h4>
+    <div class="flex items-center justify-between">
+      <a [routerLink]="['/chat']" class="bg-primary p-2 rounded-md m-auto"
+        >Acceder</a
+      >
+    </div>
   </div>
 </div>
