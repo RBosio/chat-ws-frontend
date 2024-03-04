@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core"
-import { SidebarComponent } from "../sidebar/sidebar.component"
-import { GroupService } from "../group/group.service"
 import { ActivatedRoute } from "@angular/router"
 import { NgClass, NgFor } from "@angular/common"
-import { ButtonComponent } from "../button/button.component"
 import { FormsModule } from "@angular/forms"
 import { Socket } from "ngx-socket-io"
+import { ButtonComponent } from "../../components/button/button.component"
+import { GroupService } from "../../services/group.service"
+import { SidebarComponent } from "../../components/sidebar/sidebar.component"
 
 @Component({
   selector: "app-chat",

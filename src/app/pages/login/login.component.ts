@@ -1,6 +1,6 @@
 import { Component } from "@angular/core"
-import { InputComponent } from "../../input/input.component"
-import { ButtonComponent } from "../../button/button.component"
+import { InputComponent } from "../../components/input/input.component"
+import { ButtonComponent } from "../../components/button/button.component"
 import {
   FormGroup,
   FormBuilder,
@@ -8,8 +8,8 @@ import {
   ReactiveFormsModule,
 } from "@angular/forms"
 import { NgIf } from "@angular/common"
-import { AuthService } from "../auth.service"
 import { Router } from "@angular/router"
+import { AuthService } from "../../services/auth.service"
 
 @Component({
   selector: "app-login",
