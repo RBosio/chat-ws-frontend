@@ -14,10 +14,11 @@ export interface UserSignupI {
 }
 
 export interface UserIResponse {
+  id: number
   name: string
   surname: string
   email: string
   password: string
-  dni: string
-  phone: string
+  groups: UserIResponse[]
+  url: string
 }

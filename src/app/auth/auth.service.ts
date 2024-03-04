@@ -1,20 +1,15 @@
 import { HttpClient } from "@angular/common/http"
 import { EventEmitter, Injectable } from "@angular/core"
 import { catchError, map, of, throwError } from "rxjs"
-import { UserLoginI } from "../app/models/user.model"
-import { BASE_URL } from "../app/environments/environment"
+import { UserLoginI } from "../models/user.model"
+import { BASE_URL } from "../environments/environment"
 import { Router } from "@angular/router"
-import { CookieService } from "ngx-cookie-service"
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private cookieSvc: CookieService
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   logged: EventEmitter<boolean> = new EventEmitter()
 
@@ -48,9 +43,10 @@ export class AuthService {
     return this.http
       .post(BASE_URL + "auth/login", user, { withCredentials: true })
       .pipe(
-        map((res: any) => {
+        map(async (res: any) => {
           this.logged.emit(true)
           localStorage.setItem("logged", "true")
+          localStorage.setItem("sub", res.sub)
 
           return res
         }),

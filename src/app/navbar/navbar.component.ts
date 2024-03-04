@@ -8,7 +8,7 @@ import {
   faUserPlus,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons"
-import { AuthService } from "../../auth/auth.service"
+import { AuthService } from "../auth/auth.service"
 import { NgIf } from "@angular/common"
 
 @Component({
