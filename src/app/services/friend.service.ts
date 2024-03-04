@@ -22,4 +22,17 @@ export class FriendService {
         })
       )
   }
+
+  getUsers(): Observable<UserIResponse> {
+    return this.http
+      .get(BASE_URL + "user", { withCredentials: true })
+      .pipe(
+        map((res: any) => {
+          return res
+        }),
+        catchError((err) => {
+          return throwError(err.error.message)
+        })
+      )
+  }
 }
