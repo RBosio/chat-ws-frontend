@@ -54,11 +54,29 @@
                 {{ user.surname[0].toUpperCase() + user.surname.slice(1) }}
               </p>
             </div>
-            <app-button text="Agregar"></app-button>
+            <div (click)="addNewFriend(user.id)">
+              <app-button text="Agregar"></app-button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="bg-white p-4 h-full rounded-lg w-1/3"></div>
+  <div class="bg-white p-4 h-full rounded-lg w-1/3">
+    <h3 class="text-primary text-2xl text-center">
+      Solicitudes ({{ friendRequests.length }})
+    </h3>
+    <div class="flex items-center gap-2 p-2" *ngFor="let fr of friendRequests">
+      <p>
+        {{ fr.userSend.name[0].toUpperCase() + fr.userSend.name.slice(1) }}
+        {{
+          fr.userSend.surname[0].toUpperCase() + fr.userSend.surname.slice(1)
+        }}
+        te ha enviado una solicitud!
+      </p>
+      <div (click)="accept(fr.id)">
+        <app-button text="Aceptar"></app-button>
+      </div>
+    </div>
+  </div>
 </div>

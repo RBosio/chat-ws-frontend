@@ -12,7 +12,43 @@ export class FriendService {
 
   getFriends(userId: number): Observable<UserIResponse> {
     return this.http
-      .get(BASE_URL + "user/" + userId, { withCredentials: true })
+      .get(BASE_URL + "friendRequest/accepted/" + userId, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res: any) => {
+          return res
+        }),
+        catchError((err) => {
+          return throwError(err.error.message)
+        })
+      )
+  }
+
+  getFriendRequests(userId: number): Observable<UserIResponse> {
+    return this.http
+      .get(BASE_URL + "friendRequest/waiting/" + userId, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res: any) => {
+          return res
+        }),
+        catchError((err) => {
+          return throwError(err.error.message)
+        })
+      )
+  }
+
+  acceptFriendRequests(frId: number): Observable<any> {
+    return this.http
+      .patch(
+        BASE_URL + "friendRequest/" + frId,
+        {},
+        {
+          withCredentials: true,
+        }
+      )
       .pipe(
         map((res: any) => {
           return res
@@ -24,8 +60,22 @@ export class FriendService {
   }
 
   getUsers(): Observable<UserIResponse> {
+    return this.http.get(BASE_URL + "user", { withCredentials: true }).pipe(
+      map((res: any) => {
+        return res
+      }),
+      catchError((err) => {
+        return throwError(err.error.message)
+      })
+    )
+  }
+
+  addFriend(newFriend: {
+    userSendId: number
+    userReceiveId: number
+  }): Observable<UserIResponse> {
     return this.http
-      .get(BASE_URL + "user", { withCredentials: true })
+      .post(BASE_URL + "friendRequest", newFriend, { withCredentials: true })
       .pipe(
         map((res: any) => {
           return res
