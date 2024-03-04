@@ -1,9 +1,11 @@
 <div class="flex flex-col">
   <label for="email">{{ name }}</label>
   <input
-    name="{{ name }}"
-    type="{{ type }}"
-    placeholder="{{ placeholder }}"
+    autocomplete="off"
+    [name]="name"
+    [type]="type"
+    [placeholder]="placeholder"
+    [formControl]="control"
     class="focus:outline-none border border-primary bg-transparent rounded-md p-1"
   />
 </div>
