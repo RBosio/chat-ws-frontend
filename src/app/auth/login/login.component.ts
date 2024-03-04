@@ -1,6 +1,6 @@
 import { Component } from "@angular/core"
-import { InputComponent } from "../../app/input/input.component"
-import { ButtonComponent } from "../../app/button/button.component"
+import { InputComponent } from "../../input/input.component"
+import { ButtonComponent } from "../../button/button.component"
 import {
   FormGroup,
   FormBuilder,
@@ -41,7 +41,6 @@ export class LoginComponent {
       const password = this.form.controls.password.value
 
       this.loginService.login({ email, password }).subscribe((res) => {
-        console.log(res)
         this.router.navigateByUrl("")
       })
       return
