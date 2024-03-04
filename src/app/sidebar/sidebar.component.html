@@ -1,13 +1,15 @@
-<div style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
-  <div
-    *ngFor="let user of friends"
-    class="p-4 my-2 flex items-center justify-between border-b border-b-primary hover:cursor-pointer hover:bg-slate-100"
-  >
-    <img
-      class="size-12 object-cover rounded-full"
-      src="https://img2.rtve.es/i/?w=1600&i=1634549481092.jpg"
-      alt="bruce"
-    />
-    <p class="uppercase">{{ user.name }} {{ user.surname }}</p>
+<div>
+  <div *ngFor="let user of friends">
+    <a
+      class="p-4 my-2 flex items-center justify-between border-b border-b-primary hover:cursor-pointer hover:bg-slate-100"
+      [routerLink]="['/chat/', user.group]"
+    >
+      <img
+        class="size-12 object-cover rounded-full"
+        src="https://img2.rtve.es/i/?w=1600&i=1634549481092.jpg"
+        alt="bruce"
+      />
+      <p class="uppercase">{{ user.user.name }} {{ user.user.surname }}</p>
+    </a>
   </div>
 </div>

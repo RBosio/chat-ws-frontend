@@ -19,6 +19,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: "chat/:name",
+    component: ChatComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: "**",
     redirectTo: "login",
   },

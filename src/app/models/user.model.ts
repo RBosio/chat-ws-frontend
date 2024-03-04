@@ -21,4 +21,5 @@ export interface UserIResponse {
   password: string
   groups: UserIResponse[]
   url: string
+  nameGroup: string
 }
