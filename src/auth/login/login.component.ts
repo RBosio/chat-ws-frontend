@@ -1,6 +1,6 @@
 import { Component } from "@angular/core"
-import { InputComponent } from "../input/input.component"
-import { ButtonComponent } from "../button/button.component"
+import { InputComponent } from "../../app/input/input.component"
+import { ButtonComponent } from "../../app/button/button.component"
 import {
   FormGroup,
   FormBuilder,
@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule,
 } from "@angular/forms"
 import { NgIf } from "@angular/common"
-import { LoginService } from "./login.service"
+import { AuthService } from "../auth.service"
 
 @Component({
   selector: "app-login",
@@ -48,5 +48,5 @@ export class LoginComponent {
     console.log("invalid form")
   }
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {}
+  constructor(private fb: FormBuilder, private loginService: AuthService) {}
 }
