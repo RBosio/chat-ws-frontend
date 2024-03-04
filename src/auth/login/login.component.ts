@@ -9,6 +9,7 @@ import {
 } from "@angular/forms"
 import { NgIf } from "@angular/common"
 import { AuthService } from "../auth.service"
+import { Router } from "@angular/router"
 
 @Component({
   selector: "app-login",
@@ -41,6 +42,7 @@ export class LoginComponent {
 
       this.loginService.login({ email, password }).subscribe((res) => {
         console.log(res)
+        this.router.navigateByUrl("")
       })
       return
     }
@@ -48,5 +50,9 @@ export class LoginComponent {
     console.log("invalid form")
   }
 
-  constructor(private fb: FormBuilder, private loginService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private loginService: AuthService,
+    private router: Router
+  ) {}
 }

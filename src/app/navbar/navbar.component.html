@@ -4,46 +4,49 @@
   </h1>
   <nav>
     <ul class="flex items-center justify-center gap-4">
-      <li>
-        <a
-          [routerLink]="['/']"
-          class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
-        >
-          Inicio <fa-icon [icon]="faHome"></fa-icon>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="['/login']"
-          class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
-        >
-          Iniciar sesion <fa-icon [icon]="faRightToBracket"></fa-icon>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="['/signup']"
-          class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
-        >
-          Registrarse <fa-icon [icon]="faUserPlus"></fa-icon>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="['/friends']"
-          class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
-        >
-          Amigos <fa-icon [icon]="faUserGroup"></fa-icon>
-        </a>
-      </li>
-      <li>
-        <a
-          [routerLink]="['/logout']"
-          class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
-        >
-          Salir <fa-icon [icon]="faRightFromBracket"></fa-icon>
-        </a>
-      </li>
+      <div class="flex items-center" *ngIf="logged || local">
+        <li>
+          <a
+            [routerLink]="['/']"
+            class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
+          >
+            Inicio <fa-icon [icon]="faHome"></fa-icon>
+          </a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/friends']"
+            class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
+          >
+            Amigos <fa-icon [icon]="faUserGroup"></fa-icon>
+          </a>
+        </li>
+        <li (click)="logout()">
+          <a
+            class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
+          >
+            Salir <fa-icon [icon]="faRightFromBracket"></fa-icon>
+          </a>
+        </li>
+      </div>
+      <div class="flex items-center" *ngIf="!logged && !local">
+        <li>
+          <a
+            [routerLink]="['/login']"
+            class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
+          >
+            Iniciar sesion <fa-icon [icon]="faRightToBracket"></fa-icon>
+          </a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/signup']"
+            class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
+          >
+            Registrarse <fa-icon [icon]="faUserPlus"></fa-icon>
+          </a>
+        </li>
+      </div>
     </ul>
   </nav>
 </header>

@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http"
-import { Injectable } from "@angular/core"
+import { EventEmitter, Injectable } from "@angular/core"
 import { catchError, map, of, throwError } from "rxjs"
 import { UserLoginI } from "../app/models/user.model"
 import { BASE_URL } from "../app/environments/environment"
@@ -15,6 +15,8 @@ export class AuthService {
     private router: Router,
     private cookieSvc: CookieService
   ) {}
+
+  logged: EventEmitter<boolean> = new EventEmitter()
 
   isLogged() {
     return this.http
@@ -47,6 +49,25 @@ export class AuthService {
       .post(BASE_URL + "auth/login", user, { withCredentials: true })
       .pipe(
         map((res: any) => {
+          this.logged.emit(true)
+          localStorage.setItem("logged", "true")
+
+          return res
+        }),
+        catchError((err) => {
+          return throwError(err.error.message)
+        })
+      )
+  }
+
+  logout() {
+    return this.http
+      .post(BASE_URL + "auth/logout", {}, { withCredentials: true })
+      .pipe(
+        map((res: any) => {
+          this.logged.emit(false)
+          localStorage.clear()
+
           return res
         }),
         catchError((err) => {
