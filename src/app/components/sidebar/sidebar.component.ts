@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.id = Number(localStorage.getItem("sub"))
 
-    this.friendService.getFriends(this.id).subscribe((res) => {
+    this.friendService.getUser(this.id).subscribe((res) => {
       this.user = res
 
       this.user.groups.map((fr: any) => {
