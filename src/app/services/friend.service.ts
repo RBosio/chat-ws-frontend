@@ -40,6 +40,21 @@ export class FriendService {
       )
   }
 
+  getFriendRequestsSend(userId: number): Observable<UserIResponse> {
+    return this.http
+      .get(BASE_URL + "friendRequest/waiting/send/" + userId, {
+        withCredentials: true,
+      })
+      .pipe(
+        map((res: any) => {
+          return res
+        }),
+        catchError((err) => {
+          return throwError(err.error.message)
+        })
+      )
+  }
+
   acceptFriendRequests(frId: number): Observable<any> {
     return this.http
       .patch(

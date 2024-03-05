@@ -19,36 +19,54 @@ export class FriendComponent implements OnInit {
   usersFiltered: any[] = []
   friendName: string = ""
   friendRequests: any[] = []
+  friendRequestsSend: any[] = []
 
   ngOnInit(): void {
     this.id = Number(localStorage.getItem("sub"))
-
-    this.friendService.getFriends(this.id).subscribe((res: any) => {
-      const usersReceive = res
-        .map((fr: any) => fr.userReceive)
-        .filter((u: any) => u.id !== this.id)
-
-      const usersSend = res
-        .map((fr: any) => fr.userSend)
-        .filter((u: any) => u.id !== this.id)
-
-      this.friends = usersReceive.concat(usersSend)
-
-      this.friendService.getUsers().subscribe((res: any) => {
-        const ids = this.friends.map((friend) => friend.id)
-        this.users = res.filter(
-          (user: any) => user.id !== this.id && !ids.includes(user.id)
-        )
-        this.usersFiltered = this.users
-      })
-    })
-
     this.friendService.getFriendRequests(this.id).subscribe((res: any) => {
       this.friendRequests = res.map((fr: any) => {
         return {
           id: fr.id,
           userSend: fr.userSend,
         }
+      })
+    })
+
+    this.friendService.getFriendRequestsSend(this.id).subscribe((res: any) => {
+      this.friendRequestsSend = res.map((fr: any) => {
+        return {
+          id: fr.id,
+          userReceive: fr.userReceive,
+        }
+      })
+
+      this.friendService.getFriends(this.id).subscribe((res: any) => {
+        const usersReceive = res
+          .map((fr: any) => fr.userReceive)
+          .filter((u: any) => u.id !== this.id)
+
+        const usersSend = res
+          .map((fr: any) => fr.userSend)
+          .filter((u: any) => u.id !== this.id)
+
+        this.friends = usersReceive.concat(usersSend)
+
+        this.friendService.getUsers().subscribe((res: any) => {
+          const ids = this.friends.map((friend) => friend.id)
+          this.users = res.filter(
+            (user: any) => user.id !== this.id && !ids.includes(user.id)
+          )
+          const usersReceive = this.friendRequestsSend.map(
+            (fr) => fr.userReceive.id
+          )
+          this.users = this.users.filter(
+            (user) => !usersReceive.includes(user.id)
+          )
+          const fr = this.friendRequests.map((fr) => fr.userSend.id)
+          this.users = this.users.filter((user) => !fr.includes(user.id))
+
+          this.usersFiltered = this.users
+        })
       })
     })
   }
@@ -81,7 +99,12 @@ export class FriendComponent implements OnInit {
         userSendId: this.id,
         userReceiveId: idReceive,
       })
-      .subscribe((res) => {})
+      .subscribe((res: any) => {
+        this.users = this.users.filter((user) => user.id !== res.userReceive.id)
+        this.usersFiltered = this.usersFiltered.filter(
+          (user) => user.id !== res.userReceive.id
+        )
+      })
   }
 
   constructor(private friendService: FriendService) {}
