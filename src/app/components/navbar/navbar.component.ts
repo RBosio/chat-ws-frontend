@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { NgIf } from "@angular/common"
 import { AuthService } from "../../services/auth.service"
+import { Socket } from "ngx-socket-io"
 
 @Component({
   selector: "navbar",
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.logout().subscribe(() => {
       this.router.navigateByUrl("/login")
+      this.socket.emit("close")
     })
   }
 
@@ -43,5 +45,9 @@ export class NavbarComponent implements OnInit {
   faUserGroup = faUserGroup
   faComments = faComments
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private socket: Socket
+  ) {}
 }

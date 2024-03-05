@@ -10,6 +10,7 @@ import {
 import { NgIf } from "@angular/common"
 import { Router } from "@angular/router"
 import { AuthService } from "../../services/auth.service"
+import { Socket } from "ngx-socket-io"
 
 @Component({
   selector: "app-login",
@@ -42,6 +43,7 @@ export class LoginComponent {
 
       this.loginService.login({ email, password }).subscribe((res) => {
         this.router.navigateByUrl("")
+        this.socket.emit("connected")
       })
       return
     }
@@ -52,6 +54,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private loginService: AuthService,
-    private router: Router
+    private router: Router,
+    private socket: Socket
   ) {}
 }
