@@ -39,6 +39,8 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.users = []
     }
 
+    this.socket.emit("connected")
+
     this.id = Number(localStorage.getItem("sub"))
     this.socket.fromEvent("message").subscribe((res: any) => {
       const m = {
