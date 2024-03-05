@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
-import { NgClass, NgFor } from "@angular/common"
+import { NgClass, NgFor, NgIf } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { Socket } from "ngx-socket-io"
 import { ButtonComponent } from "../../components/button/button.component"
@@ -10,7 +10,14 @@ import { SidebarComponent } from "../../components/sidebar/sidebar.component"
 @Component({
   selector: "app-chat",
   standalone: true,
-  imports: [SidebarComponent, NgFor, NgClass, ButtonComponent, FormsModule],
+  imports: [
+    SidebarComponent,
+    NgFor,
+    NgClass,
+    NgIf,
+    ButtonComponent,
+    FormsModule,
+  ],
   templateUrl: "./chat.component.html",
 })
 export class ChatComponent implements OnInit {
@@ -19,6 +26,7 @@ export class ChatComponent implements OnInit {
   message!: string
   groupId!: number
   groupName!: string
+  chat: boolean = false
 
   ngOnInit(): void {
     this.id = Number(localStorage.getItem("sub"))
@@ -35,12 +43,17 @@ export class ChatComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.groupName = params["name"]
-      this.groupService.getGroup(this.groupName).subscribe((res) => {
-        this.messages = res.messages
-        this.groupId = res.id
+      if (this.groupName) {
+        this.groupService.getGroup(this.groupName).subscribe((res) => {
+          this.messages = res.messages
+          this.groupId = res.id
 
-        this.socket.emit("join", this.groupName)
-      })
+          this.socket.emit("join", this.groupName)
+        })
+        this.chat = true
+      } else {
+        this.chat = false
+      }
     })
   }
 
