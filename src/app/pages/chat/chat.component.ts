@@ -32,6 +32,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     moment.locale("es")
+    const users = localStorage.getItem("users")
+    if (users) {
+      this.users = JSON.parse(users)
+    } else {
+      this.users = []
+    }
+
     this.id = Number(localStorage.getItem("sub"))
     this.socket.fromEvent("message").subscribe((res: any) => {
       const m = {
@@ -42,10 +49,18 @@ export class ChatComponent implements OnInit, OnDestroy {
         created_at: moment(res.created_at).format("LLL"),
       }
       this.messages.push(m)
+
+      setTimeout(() => {
+        const scroller = document.getElementById("scroller")
+        if (scroller) {
+          scroller.scrollTop = scroller.scrollHeight - scroller.clientHeight
+        }
+      }, 200)
     })
 
     this.socket.fromEvent("users").subscribe((res: any) => {
       this.users = res.split(",").map((id: any) => Number(id))
+      localStorage.setItem("users", JSON.stringify(this.users))
     })
 
     this.route.params.subscribe((params) => {
@@ -57,6 +72,13 @@ export class ChatComponent implements OnInit, OnDestroy {
             message.created_at = moment(message.created_at).format("LLL")
             return message
           })
+          setTimeout(() => {
+            const scroller = document.getElementById("scroller")
+            if (scroller) {
+              scroller.scrollTop = scroller.scrollHeight - scroller.clientHeight
+            }
+          }, 100)
+
           this.groupId = res.id
 
           this.socket.emit("join", this.groupName)
@@ -80,6 +102,12 @@ export class ChatComponent implements OnInit, OnDestroy {
           })
 
           this.message = ""
+          setTimeout(() => {
+            const scroller = document.getElementById("scroller")
+            if (scroller) {
+              scroller.scrollTop = scroller.scrollHeight - scroller.clientHeight
+            }
+          }, 200)
         })
     }
   }
