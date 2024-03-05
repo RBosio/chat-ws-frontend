@@ -9,7 +9,7 @@
     *ngIf="chat"
     class="w-3/4 bg-white h-full rounded-md p-4 flex flex-col gap-4 relative"
   >
-    <div class="h-[90%] overflow-y-scroll">
+    <div id="scroller" class="h-[90%] overflow-y-scroll">
       <div
         *ngFor="let message of messages"
         class="flex justify-between items-center w-[60%] p-2 bg-primary rounded-md my-4 gap-4"
