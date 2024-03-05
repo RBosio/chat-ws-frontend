@@ -3,21 +3,22 @@
   class="flex items-center w-full h-[calc(100vh-80px)] gap-4 p-8"
 >
   <div class="w-1/4 bg-white h-full rounded-md">
-    <app-sidebar></app-sidebar>
+    <app-sidebar [users]="users"></app-sidebar>
   </div>
   <div
-    class="w-3/4 bg-white h-full rounded-md p-8 flex flex-col gap-4 relative"
+    *ngIf="chat"
+    class="w-3/4 bg-white h-full rounded-md p-4 flex flex-col gap-4 relative"
   >
     <div class="h-[90%] overflow-y-scroll">
       <div
         *ngFor="let message of messages"
-        class="flex justify-between items-center w-[40%] p-2 bg-primary rounded-md my-4"
+        class="flex justify-between items-center w-[60%] p-2 bg-primary rounded-md my-4 gap-4"
         [ngClass]="{
           'ml-auto': id === message.userSend.id,
           'bg-slate-600': id !== message.userSend.id
         }"
       >
-        <p class="text-xl text-white">
+        <p class="text-sm text-white">
           {{ message.message }}
         </p>
         <p class="text-xs text-gray-200">
@@ -25,14 +26,17 @@
         </p>
       </div>
     </div>
-    <div class="flex w-full relative">
-      <input
-        type="text"
-        class="absolute -bottom-12 border border-primary p-1 w-3/4 focus:outline-none"
-        [(ngModel)]="message"
-        (keypress)="sendMessage($event.key)"
-      />
-      <div class="absolute -bottom-12 right-12" (click)="sendMessage('')">
+    <div class="flex items-center gap-4">
+      <div class="w-full">
+        <input
+          placeholder="Ingrese un mensaje"
+          type="text"
+          class="focus:outline-none border border-primary bg-transparent rounded-md p-1 w-full"
+          [(ngModel)]="message"
+          (keypress)="sendMessage($event.key)"
+        />
+      </div>
+      <div (click)="sendMessage('')">
         <app-button text="Enviar"></app-button>
       </div>
     </div>

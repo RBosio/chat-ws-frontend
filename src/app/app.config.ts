@@ -10,7 +10,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(
       HttpClientModule,
-      SocketIoModule.forRoot({ url: "http://localhost:3000", options: {} })
+      SocketIoModule.forRoot({
+        url: "http://localhost:3000",
+        options: {
+          withCredentials: true,
+        },
+      })
     ),
   ],
 }

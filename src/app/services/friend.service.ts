@@ -85,6 +85,19 @@ export class FriendService {
     )
   }
 
+  getUser(userId: number): Observable<UserIResponse> {
+    return this.http
+      .get(BASE_URL + "user/" + userId, { withCredentials: true })
+      .pipe(
+        map((res: any) => {
+          return res
+        }),
+        catchError((err) => {
+          return throwError(err.error.message)
+        })
+      )
+  }
+
   addFriend(newFriend: {
     userSendId: number
     userReceiveId: number
