@@ -15,6 +15,14 @@
         </li>
         <li>
           <a
+            [routerLink]="['/chat']"
+            class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
+          >
+            Chats <fa-icon [icon]="faComments"></fa-icon>
+          </a>
+        </li>
+        <li>
+          <a
             [routerLink]="['/friends']"
             class="flex items-center gap-2 p-4 hover:cursor-pointer hover:opacity-70"
           >

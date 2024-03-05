@@ -12,13 +12,13 @@
     <div class="h-[90%] overflow-y-scroll">
       <div
         *ngFor="let message of messages"
-        class="flex justify-between items-center w-[40%] p-2 bg-primary rounded-md my-4"
+        class="flex justify-between items-center w-[60%] p-2 bg-primary rounded-md my-4 gap-4"
         [ngClass]="{
           'ml-auto': id === message.userSend.id,
           'bg-slate-600': id !== message.userSend.id
         }"
       >
-        <p class="text-xl text-white">
+        <p class="text-sm text-white">
           {{ message.message }}
         </p>
         <p class="text-xs text-gray-200">

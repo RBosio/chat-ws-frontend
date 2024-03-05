@@ -7,6 +7,7 @@ import {
   faRightFromBracket,
   faUserPlus,
   faUserGroup,
+  faComments,
 } from "@fortawesome/free-solid-svg-icons"
 import { NgIf } from "@angular/common"
 import { AuthService } from "../../services/auth.service"
@@ -40,6 +41,7 @@ export class NavbarComponent implements OnInit {
   faRightFromBracket = faRightFromBracket
   faUserPlus = faUserPlus
   faUserGroup = faUserGroup
+  faComments = faComments
 
   constructor(private authService: AuthService, private router: Router) {}
 }
