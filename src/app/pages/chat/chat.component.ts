@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, OnDestroy, OnInit } from "@angular/core"
 import { ActivatedRoute } from "@angular/router"
 import { NgClass, NgFor, NgIf } from "@angular/common"
 import { FormsModule } from "@angular/forms"
@@ -21,13 +21,14 @@ import moment from "moment"
   ],
   templateUrl: "./chat.component.html",
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   messages: any[] = []
   id!: number
   message!: string
   groupId!: number
   groupName!: string
   chat: boolean = false
+  users: number[] = []
 
   ngOnInit(): void {
     moment.locale("es")
@@ -41,6 +42,10 @@ export class ChatComponent implements OnInit {
         created_at: moment(res.created_at).format("LLL"),
       }
       this.messages.push(m)
+    })
+
+    this.socket.fromEvent("users").subscribe((res: any) => {
+      this.users = res.split(",").map((id: any) => Number(id))
     })
 
     this.route.params.subscribe((params) => {
@@ -84,4 +89,8 @@ export class ChatComponent implements OnInit {
     private route: ActivatedRoute,
     private socket: Socket
   ) {}
+
+  ngOnDestroy(): void {
+    this.socket.emit("leave", this.groupName)
+  }
 }

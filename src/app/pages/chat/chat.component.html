@@ -3,7 +3,7 @@
   class="flex items-center w-full h-[calc(100vh-80px)] gap-4 p-8"
 >
   <div class="w-1/4 bg-white h-full rounded-md">
-    <app-sidebar></app-sidebar>
+    <app-sidebar [users]="users"></app-sidebar>
   </div>
   <div
     *ngIf="chat"

@@ -1,18 +1,20 @@
-import { Component, OnInit } from "@angular/core"
-import { NgFor } from "@angular/common"
+import { Component, Input, OnInit } from "@angular/core"
+import { NgFor, NgIf } from "@angular/common"
 import { RouterLink } from "@angular/router"
 import { FriendService } from "../../services/friend.service"
 
 @Component({
   selector: "app-sidebar",
   standalone: true,
-  imports: [NgFor, RouterLink],
+  imports: [NgFor, RouterLink, NgIf],
   templateUrl: "./sidebar.component.html",
 })
 export class SidebarComponent implements OnInit {
   user!: any
   friends: any[] = []
   id!: number
+
+  @Input() users: number[] = []
 
   ngOnInit(): void {
     this.id = Number(localStorage.getItem("sub"))
