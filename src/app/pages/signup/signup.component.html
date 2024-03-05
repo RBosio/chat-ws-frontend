@@ -1,0 +1,73 @@
+<div
+  class="m-auto w-1/3 flex flex-col items-center justify-center bg-white rounded-md mt-12 p-4"
+>
+  <h3 class="text-3xl">Registro</h3>
+  <form
+    class="flex flex-col gap-4"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit($event)"
+  >
+    <app-input
+      name="email"
+      type="email"
+      placeholder="example@gmail.com"
+      [control]="$any(form.controls.email)"
+    ></app-input>
+    <app-input
+      name="password"
+      type="password"
+      [control]="$any(form.controls.password)"
+    ></app-input>
+    <app-input
+      name="nombre"
+      type="text"
+      placeholder="Bruce"
+      [control]="$any(form.controls.nombre)"
+    ></app-input>
+    <app-input
+      name="apellido"
+      type="text"
+      placeholder="Wayne"
+      [control]="$any(form.controls.apellido)"
+    ></app-input>
+    <div class="flex justify-center">
+      <app-button text="Ingresar"></app-button>
+    </div>
+  </form>
+  <div
+    class="bg-red-600 w-3/4 p-2 text-white text-center mt-2 rounded-md"
+    *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']"
+  >
+    Email <strong>requerido</strong>
+  </div>
+  <div
+    class="bg-red-600 w-3/4 p-2 text-white text-center mt-2 rounded-md"
+    *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']"
+  >
+    Email <strong>inválido</strong>
+  </div>
+  <div
+    class="bg-red-600 w-3/4 p-2 text-white text-center mt-2 rounded-md"
+    *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['required']"
+  >
+    Contraseña <strong>requerida</strong>
+  </div>
+  <div
+    class="bg-red-600 w-3/4 p-2 text-white text-center mt-2 rounded-md"
+    *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['minlength']"
+  >
+    La contraseña debe tener mínimo <strong>6 caracteres</strong>
+  </div>
+  <div
+    class="bg-red-600 w-3/4 p-2 text-white text-center mt-2 rounded-md"
+    *ngIf="form.get('name')?.touched && form.get('name')?.errors?.['required']"
+  >
+    Nombre <strong>requerido</strong>
+  </div>
+  <div
+    class="bg-red-600 w-3/4 p-2 text-white text-center mt-2 rounded-md"
+    *ngIf="form.get('surname')?.touched && form.get('surname')?.errors?.['required']"
+  >
+    Apellido <strong>requerido</strong>
+  </div>
+</div>

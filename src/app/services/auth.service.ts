@@ -72,7 +72,7 @@ export class AuthService {
       )
   }
 
-  signup(user: UserLoginI) {
+  signup(user: any) {
     return this.http.post(BASE_URL + "auth/signup", user).pipe(
       map((res) => {
         return res
